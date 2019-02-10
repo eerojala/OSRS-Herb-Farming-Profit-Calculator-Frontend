@@ -41,7 +41,10 @@ export const calculatorInit = () => {
     }
 }
 
-export const calculatorUpdate = (i, seedPrice, seedAmount, herbPrice, herbAmount) => {
+export const calculatorUpdate = (i, seedPrice, seedAmountInput, herbPrice, herbAmountInput) => {
+    const seedAmount = isNaN(seedAmountInput) ? 0 : seedAmountInput
+    const herbAmount = isNaN(herbAmountInput) ? 0 : herbAmountInput
+
     const seedCost = +(seedPrice * seedAmount).toFixed(3) // the + converts the string returned by .toFixed into a number again
     const herbProfit = +(seedAmount * herbAmount * herbPrice).toFixed(3) 
     const totalProfit = +(herbProfit - seedCost).toFixed(3)

@@ -34,9 +34,7 @@ class ItemsView extends React.Component {
         const herbPrice = this.herbs[i].price  
         const herbAmount = this.herbAmounts[i]
 
-        if (!isNaN(seedAmount) && !isNaN(herbAmount)) {
-            this.props.calculatorUpdate(i, seedPrice, seedAmount, herbPrice, herbAmount)
-        }
+        this.props.calculatorUpdate(i, seedPrice, seedAmount, herbPrice, herbAmount)
     }
 
     toggleHerbTypeForAll = () => {
@@ -185,8 +183,8 @@ class ItemsView extends React.Component {
                             <Table.Cell>
                                 <input 
                                     type="number" 
-                                    step="0.1" 
-                                    value={this.props.calculator[i].seedAmount} 
+                                    step="1" 
+                                    value={this.seedAmounts[i]} 
                                     onChange={this.updateSeedAmount(i)}
                                 />
                             </Table.Cell>
@@ -203,8 +201,8 @@ class ItemsView extends React.Component {
                             <Table.Cell>
                                 <input 
                                     type="number" 
-                                    step="0.1" 
-                                    value={this.props.calculator[i].herbAmount} 
+                                    step="1" 
+                                    value={this.herbAmounts[i]} 
                                     onChange={this.updateHerbAmount(i)} 
                                 />
                             </Table.Cell>
