@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Table, TableCell } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react'
 
 import { calculatorInit, calculatorUpdate } from '../reducers/calculatorReducer'
 
@@ -10,7 +10,6 @@ class ItemsView extends React.Component {
     seedAmounts = new Array(14).fill(0) // Array with amounts for each seed. 0 by default.
     herbAmounts = new Array(14).fill(0) // Array with amounts for each expected herb harvest per seed. 0 by default.
     currentlyClean = new Array(14).fill(false) // Array with boolean status determining clean/grimy status for each herb
-    herbs
     allHerbTypeToggle = false
     firstRender = true
     editAllSeedAmount = false
@@ -132,8 +131,8 @@ class ItemsView extends React.Component {
     }
 
     render() {
-        if (this.props.seeds.length === 0 || this.props.grimyHerbs.length === 0 || this.props.cleanHerbs.length === 0) {
-            return null
+        if (this.props.seeds.length !== 14 || this.props.grimyHerbs.length !== 14 || this.props.cleanHerbs.length !== 14) {
+            return <p>Database is missing data, please come back later</p>
         }
 
         if (this.firstRender) {
@@ -171,9 +170,9 @@ class ItemsView extends React.Component {
                     </Table.Header>
                     <Table.Body>
                         {this.visibleIndexes.map(i => <Table.Row key={i}>
-                            <TableCell>
+                            <Table.Cell>
                                 <button onClick={this.hide(i)}>Hide</button>
-                            </TableCell>
+                            </Table.Cell>
                             <Table.Cell>
                                 {this.props.seeds[i].name}                            
                             </Table.Cell>
